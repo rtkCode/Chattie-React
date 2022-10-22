@@ -1,0 +1,23 @@
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.main-nav h1 {
+    margin: 0;
+    padding: 20px 0;
+}
+
+.main-add {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+    padding: 10px 14px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 30px;
+    font-weight: bold;
+}

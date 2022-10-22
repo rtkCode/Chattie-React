@@ -1,0 +1,23 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.navigation-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    border-top: 1px solid #000000;
+    padding: 10px;
+}
+
+.navigation-button span {
+    font-size: 12px;
+}
+
+.navigation-icon {
+	width: 26px;
+	height: 26px;
+}

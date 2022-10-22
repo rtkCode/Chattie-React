@@ -1,0 +1,24 @@
+.profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.big-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+.profile .username {
+    width: fit-content;
+    margin-top: 10px;
+    font-size: 28px;
+    outline: none;
+    border: 0;
+    text-align: center;
+}
