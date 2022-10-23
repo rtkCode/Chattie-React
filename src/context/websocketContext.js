@@ -1,6 +1,8 @@
 import {useState, useEffect, useRef, createContext} from "react"
 import { w3cwebsocket as WS } from "websocket";
 
+import useLocalStorage from './../hooks/useLocalStorage'
+
 const WebsocketContext = createContext()
 
 function WebsocketContextProvider(props) {
@@ -9,19 +11,24 @@ function WebsocketContextProvider(props) {
     // receiver is who you chat with
     const [receiver, setReceiver] = useState("")
 
+    const [user, setUser] = useLocalStorage("user", "")
+
     const websocket = useRef(null);
 
     useEffect(()=>{
         // clear messages
         setMessages([])
 
+        const auth = {
+            user,
+            publicKey: "0"
+        }
+
         // establish connection
-        const ws = new WS('wss://messages.tiantianx2.repl.co');
+        const ws = new WS('wss://messages.tiantianx2.repl.co', [auth.user, auth.publicKey]);
         ws.onmessage = (message) => {
-            // console.log(message)
-            const [msgText, msgSender, msgReceiver] = JSON.parse(message.data)
-            if(msgSender === receiver || msgSender === "") 
-                setMessages(prev => [...prev, {data: msgText, received: true}])
+            const {text, sender, receiver} = JSON.parse(message.data)
+            setMessages(prev => [...prev, {data: text, received: true}])
         }
         websocket.current = ws
 
@@ -31,7 +38,11 @@ function WebsocketContextProvider(props) {
     }, [receiver])
     
     function sendMessage(text, sender, receiver) {
-        websocket.current.send(JSON.stringify([text, sender, receiver]))
+        websocket.current.send(JSON.stringify({
+            text, 
+            sender, 
+            receiver
+        }))
         setMessages(prev => [...prev, {data: text}])
     }
     
