@@ -16,6 +16,16 @@ function WebsocketContextProvider(props) {
     const websocket = useRef(null);
 
     useEffect(()=>{
+        const randomUsername = () => {
+            let output = "ChattieUser"
+            for(let i = 0; i < 5; i ++) {
+                output += Math.floor(Math.random()*10)
+            }
+            return output
+        }
+
+        if(user === "") setUser(randomUsername())
+
         // clear messages
         setMessages([])
 
