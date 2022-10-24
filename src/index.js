@@ -5,6 +5,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// safari polyfill
+function calculateVh() {
+	var vh = window.innerHeight * 0.01;
+	document.documentElement.style.setProperty('--vh', vh + 'px');
+}
+
+calculateVh();
+
+window.addEventListener('resize', calculateVh);
+window.addEventListener('orientationchange', calculateVh);
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<Router>
